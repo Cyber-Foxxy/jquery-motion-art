@@ -1,0 +1,121 @@
+$(document).ready(function() {
+
+  // =========================
+  // IMAGE SYSTEM
+  // =========================
+  const images = [
+    "https://as2.ftcdn.net/v2/jpg/06/62/01/33/1000_F_662013316_m93HOlkAlZwwNdC0Jb0nsRtZgtpC1cAz.jpg",
+    "https://img.freepik.com/premium-photo/futuristic-robot-surrounded-by-lush-greenery-symbolizing-blend-technology-nature-vibrant-ecosystem_1099133-86438.jpg",
+    "https://as2.ftcdn.net/v2/jpg/07/49/50/99/1000_F_749509985_Wg8UieRYTZQ3OmXwxgcWauRLdlQUHmRo.jpg",
+    "https://as1.ftcdn.net/v2/jpg/07/83/53/70/1000_F_783537024_9f99v5323pd3o9epjvsf0Qx7A97qenmc.jpg",
+    "https://as2.ftcdn.net/v2/jpg/07/68/04/07/1000_F_768040770_Ab5NvqiRyKUL8PFlW8M1Kqjk7xB5AfBN.jpg",
+    "https://i.pinimg.com/736x/9f/69/98/9f6998974bf51e17a53bdd43109b4689.jpg"
+  ];
+
+  let imgIndex = 0;
+
+  function moveImage() {
+    let x = Math.random() * (window.innerWidth - 320);
+    let y = Math.random() * (window.innerHeight - 220);
+
+    $("#imageBox").animate({ left: x, top: y }, 2000);
+  }
+
+  function cycleImages() {
+    $("#mainImage").fadeOut(1000, function() {
+      imgIndex = (imgIndex + 1) % images.length;
+      $(this).attr("src", images[imgIndex]).fadeIn(1000);
+      moveImage();
+    });
+  }
+
+  $("#mainImage").attr("src", images[0]);
+  moveImage();
+  setInterval(cycleImages, 4000);
+
+
+  // =========================
+  // TEXT SYSTEM (Wellness)
+  // =========================
+  const texts = [
+    "Overstimulated mind (Emotional)",
+    "Disconnected from others (Social)",
+    "Body feels tired (Physical)",
+    "Too much information (Intellectual)",
+    "Searching for meaning (Spiritual)",
+    "Work feels mechanical (Occupational)",
+    "Lost in artificial spaces (Environmental)",
+    "Chasing numbers endlessly (Financial)",
+    "Return to balance 🌱"
+  ];
+
+  let textIndex = 0;
+
+  function moveText() {
+    let x = Math.random() * (window.innerWidth - 300);
+    let y = Math.random() * (window.innerHeight - 50);
+
+    $("#textBox").animate({ left: x, top: y }, 2000);
+  }
+
+  function cycleText() {
+    $("#textBox").fadeOut(500, function() {
+      textIndex = (textIndex + 1) % texts.length;
+      $(this).text(texts[textIndex]).fadeIn(500);
+      moveText();
+    });
+  }
+
+  $("#textBox").text(texts[0]);
+  moveText();
+  setInterval(cycleText, 3500);
+
+
+  // =========================
+  // SHAPE SYSTEM
+  // =========================
+  const shapes = [
+    { class: "square", color: "#888888" },   // tech gray
+    { class: "triangle", color: "#00ffff" }, // neon tech
+    { class: "square", color: "#555555" },
+    { class: "circle", color: "#4caf50" },   // nature green
+    { class: "circle", color: "#8b5a2b" }    // earth brown
+  ];
+
+  let shapeIndex = 0;
+
+  function moveShape() {
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 100);
+
+    $("#shape").animate({ left: x, top: y }, 2000);
+  }
+
+  function cycleShape() {
+    shapeIndex = (shapeIndex + 1) % shapes.length;
+
+    $("#shape").fadeOut(500, function() {
+      $(this).removeClass().addClass(shapes[shapeIndex].class);
+
+      if (shapes[shapeIndex].class !== "triangle") {
+        $(this).css({
+          background: shapes[shapeIndex].color,
+          border: "none"
+        });
+      } else {
+        $(this).css({
+          borderBottomColor: shapes[shapeIndex].color,
+          background: "none"
+        });
+      }
+
+      $(this).fadeIn(500);
+      moveShape();
+    });
+  }
+
+  $("#shape").addClass(shapes[0].class).css("background", shapes[0].color);
+  moveShape();
+  setInterval(cycleShape, 3000);
+
+});
